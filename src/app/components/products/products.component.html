@@ -1,7 +1,19 @@
 <div class="products--grid">
-  <app-product
-    [product]="product"
-    *ngFor="let product of products"
-    (addedProduct)="onAddToShoppingCart($event)"
-  ></app-product>
+  <app-product [product]="product" *ngFor="let product of products" (addedProduct)="onAddToShoppingCart($event)"
+    (showProduct)="onShowProductDetail($event)"></app-product>
+  <button (click)="toggleProductDetail()">Toggle</button>
+  <button (click)="createNewProduct()">New Product</button>
+</div>
+<div class="product-detail" [class.active]="showProductDetail">
+  <div class="container">
+    <button (click)="toggleProductDetail()">X</button>
+    <h2>Category > {{productDetail.category.name}}</h2>
+    <h1>{{productDetail.title}}</h1>
+    <p class="description">{{productDetail.description}}</p>
+    <h2 class="price">{{ productDetail.price | currency:'MXN' }}</h2>
+    <div *ngFor="let img of productDetail.images">
+      <img [src]="img" style="width: 25%; height: auto; float:left; padding: 12px;" />
+    </div>
+    <button (click)="updateProduct()">Update</button>
+  </div>
 </div>
