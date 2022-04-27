@@ -11,6 +11,7 @@
     <h1>{{productDetail.title}}</h1>
     <p class="description">{{productDetail.description}}</p>
     <h2 class="price">{{ productDetail.price | currency:'MXN' }}</h2>
+    <h2 class="price">{{ productDetail?.taxes | currency:'MXN' }}</h2>
     <div *ngFor="let img of productDetail.images">
       <img [src]="img" style="width: 25%; height: auto; float:left; padding: 12px;" />
     </div>
