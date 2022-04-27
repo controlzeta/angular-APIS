@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Product } from '../../models/product.model';
-
+import { switchMap, zip } from 'rxjs/operators';
 import { StoreService } from '../../services/store.service';
 import { ProductsService } from '../../services/products.service';
 
@@ -65,7 +65,7 @@ export class ProductsComponent implements OnInit {
       categoryId: 1,
       images : ['https://controlzetacv.firebaseapp.com/assets/img/angular.png'],
       price: 1
-    }).subscribe(data => {
+    }).subscribe((data:any) => {
       this.productDetail = data;
       this.products.push(data);
     });
@@ -80,6 +80,26 @@ export class ProductsComponent implements OnInit {
       const index = this.products.findIndex(item => item.id === this.productDetail.id);
       this.products[index] = data;
     });
+  }
+
+  readAndUpdate(id:string){
+      this.productsService.getProduct(id)
+      .pipe(
+        switchMap(
+          (product : Product) => 
+            this.productsService.updateProduct(product.id, {title: 'Change '})),
+      )
+      .subscribe((data : Product) => {
+        console.log(data);
+      });
+      zip(
+        this.productsService.getProduct(id),
+        this.productsService.updateProduct(id, {title: 'Change '})
+      )
+      // .subscribe( (response:any) => {
+      //     const product = response[0];
+      //     const update = response[1];
+      // })
   }
 
 }
