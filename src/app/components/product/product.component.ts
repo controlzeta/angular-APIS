@@ -19,6 +19,7 @@ export class ProductComponent {
   };
   @Output() addedProduct = new EventEmitter<Product>();
   @Output() showProduct = new EventEmitter<string>();
+
   constructor() { }
 
   onAddToCart() {

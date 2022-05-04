@@ -31,7 +31,7 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   ngOnChanges(changes: SimpleChanges) {
     // before - during render
     // changes inputs -- multiples times
-    console.log('ngOnChanges', 'imgValue =>', this.img);
+    // console.log('ngOnChanges', 'imgValue =>', this.img);
     console.log('changes', changes);
     // if (changes.) {
     //   // code
